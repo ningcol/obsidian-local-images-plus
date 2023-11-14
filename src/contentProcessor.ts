@@ -315,9 +315,7 @@ async function chooseFileName(
   const ignoredExt = settings.ignoredExt.split("|");
   let fileExt = await getFileExt(contentData, parsedUrl.pathname);
   logError("file: "+link+" content: "+contentData+" file ext: "+fileExt,false);
-  
 
- 
   if (fileExt == "unknown" && !settings.downUnknown) {
     return { fileName: "", needWrite: false };
     }
@@ -329,8 +327,8 @@ async function chooseFileName(
 
 
  
-  
-  const baseName =  md5Sig(contentData);
+  const baseName = path.basename(link, '.'+fileExt);
+  // const baseName =  md5Sig(contentData);
 
   let needWrite = true;
   let fileName = "";
